@@ -1,0 +1,11 @@
+*.dylib
+*.so
+*.o
+tests/test*
+!tests/test*.c
+a.out
+
+*.dSYM/
+*~
+.DS_Store
+
