@@ -16,8 +16,10 @@ IFLAGS = -I $(INCDIR) -I $(INCDIR)/$(ARCH)
 LDFLAGS = 
 LIBS = -L $(LIBDIR) -l$(NAME)
 
-INCDIR = ../src
-LIBDIR = ../src
+PREFIX = /opt
+
+INCDIR = $(PREFIX)/include/$(NAME)
+LIBDIR = $(PREFIX)/lib
 
 ifeq ($(ARCH), i386)
 CFLAGS += -m32 -mstackrealign

@@ -6,6 +6,7 @@ OS = $(shell uname -s)
 
 NAME = tswtch
 SRCS = tcontext.c
+HDRS = tcontext.h $(ARCH)/tcontextstr.h
 ASMS = tswtch.S
 OBJS = $(SRCS:%.c=%.o) $(ASMS:%.S=%.o)
 LIB = lib$(NAME).$(DYLIB_SUFFIX)
@@ -15,6 +16,10 @@ CFLAGS = -std=c99 -pedantic -Wall -Wextra -Werror -O2 -g
 CPPFLAGS =
 IFLAGS = -I . -I $(ARCH)
 LDFLAGS = $(DYLIB_FLAGS)
+
+RM = rm -f
+MKDIR = mkdir
+CP = cp
 
 ifeq ($(ARCH), i386)
 CFLAGS += -m32 -mstackrealign
@@ -31,6 +36,10 @@ DYLIB_FLAGS = -shared
 DYLIB_SUFFIX = so
 endif
 
+PREFIX = /opt
+INCDIR = $(PREFIX)/include/$(NAME)
+LIBDIR = $(PREFIX)/lib
+
 %.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(IFLAGS) -c -o $@ $<
 
@@ -45,6 +54,14 @@ all: $(LIB)
 $(LIB): $(OBJS)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
+tcontext.o: tcontext.h $(ARCH)/tcontextstr.h
+
+install: $(LIB)
+	$(MKDIR) -p $(INCDIR)
+	$(CP) $(HDRS) $(INCDIR)
+	$(MKDIR) -p $(LIBDIR)
+	$(CP) $(LIB) $(LIBDIR)
+
 clean:
 	$(RM) $(LIB)
 	$(RM) $(OBJS)
@@ -54,4 +71,3 @@ allclean: clean
 	$(RM) a.out
 	$(RM) *~
 	$(RM) .DS_Store
-
