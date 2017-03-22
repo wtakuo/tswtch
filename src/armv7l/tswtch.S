@@ -32,4 +32,3 @@ TSWTCH:
         mov r11, r5
         mov r12, r6
         pop { r0, r4-r7, pc }
-

@@ -5,8 +5,8 @@ ARCH = $(shell uname -m)
 OS = $(shell uname -s)
 
 NAME = tswtch
-SRCS = tcontext.c
-HDRS = tcontext.h $(ARCH)/tcontextstr.h
+SRCS = tcontext.c tthread.c
+HDRS = tcontext.h $(ARCH)/tcontextstr.h tthread.h
 ASMS = tswtch.S
 OBJS = $(SRCS:%.c=%.o) $(ASMS:%.S=%.o)
 LIB = lib$(NAME).$(DYLIB_SUFFIX)
@@ -55,6 +55,8 @@ $(LIB): $(OBJS)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 tcontext.o: tcontext.h $(ARCH)/tcontextstr.h
+
+tthread.o: tcontext.h $(ARCH)/tcontextstr.h tthread.h
 
 install: $(LIB)
 	$(MKDIR) -p $(INCDIR)

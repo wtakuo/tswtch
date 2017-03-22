@@ -24,9 +24,9 @@ void free_tstack(tstack_t stack) {
 }
 
 tcontext_t new_tcontext(tstack_t sp, void (*fun)(void *), void *arg) {
-    tcontext_t ctx =
-        (tcontext_t)(sp - (sizeof(struct tcontext) - 1) / sizeof(void *) - 1);
-    ctx->fun = fun;
-    ctx->arg = arg;
-    return ctx;
+    tcontext_t context =
+        (tcontext_t)((char *)sp - sizeof(struct tcontext));
+    context->fun = fun;
+    context->arg = arg;
+    return context;
 }

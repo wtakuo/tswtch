@@ -16,4 +16,3 @@ tstack_t alloc_tstack(void);
 void free_tstack(tstack_t stack);
 tcontext_t new_tcontext(tstack_t sp, void (*fun)(void *), void *arg);
 void tswtch(tcontext_t *old, tcontext_t new);
-

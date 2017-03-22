@@ -12,4 +12,5 @@ typedef struct tcontext {
     void *rbx;
     void *rbp;
     void (*fun)(void *);  // rip
+    void *pad;            // padding for 16bit alignment of rip
 } *tcontext_t;

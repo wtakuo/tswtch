@@ -7,7 +7,7 @@ OS = $(shell uname -s)
 NAME = tswtch
 SRCS = $(EXES:%=%.c)
 OBJS = $(SRCS:%.c=%.o)
-EXES = test0
+EXES = test0 test1 test2 test3
 
 CC = gcc
 CFLAGS = -std=c99 -pedantic -Wall -Wextra -Werror -O2 -g
@@ -16,10 +16,11 @@ IFLAGS = -I $(INCDIR) -I $(INCDIR)/$(ARCH)
 LDFLAGS = 
 LIBS = -L $(LIBDIR) -l$(NAME)
 
-PREFIX = /opt
-
-INCDIR = $(PREFIX)/include/$(NAME)
-LIBDIR = $(PREFIX)/lib
+#PREFIX = /opt
+#INCDIR = $(PREFIX)/include/$(NAME)
+#LIBDIR = $(PREFIX)/lib
+INCDIR = ../src
+LIBDIR = ../src
 
 ifeq ($(ARCH), i386)
 CFLAGS += -m32 -mstackrealign
@@ -55,4 +56,3 @@ allclean: clean
 	$(RM) a.out
 	$(RM) *~
 	$(RM) .DS_Store
-

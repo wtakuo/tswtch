@@ -1,3 +1,8 @@
+/*
+ * tswtch : A simple user-level task switching library
+ * Copyright (c) 2014-2017 Takuo Watanabe
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
